@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ openModal, showButton }) => {
                 {showButton && (
                     <button
                         onClick={openModal}
-                        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 mt-2 md:mt-0"
+                        className="px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 mt-2 md:mt-0"
                     >
                         Add New Movie
                     </button>
