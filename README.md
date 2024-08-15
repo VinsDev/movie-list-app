@@ -1,6 +1,6 @@
 # Movie List Application
 
-A responsive and dynamic movie list application built using React, Vite, TypeScript, Tailwind CSS, React Router, and Redux.
+A responsive and dynamic movie list application built using React, Vite, TypeScript, Tailwind CSS, React Router Redux, and The Movie Database (TMDb) API.
 
 ## Features
 
@@ -15,7 +15,6 @@ A responsive and dynamic movie list application built using React, Vite, TypeScr
 
 ## Project Structure
 
-```
 src/
 │
 ├── app/                      # Application-wide settings and store configuration
@@ -85,43 +84,41 @@ src/
 ├── tsconfig.node.json        # TypeScript configuration for Node.js
 ├── vite.config.ts            # Vite configuration
 └── index.tsx                 # Main entry point for the React application
-```
 
 ## Setup Instructions
 
 1. **Clone the Repository**
-   ```sh
    git clone https://github.com/VinsDev/movie-list-app.git
    cd movie-list-app
-   ```
 
 2. **Install Dependencies**
-   ```sh
    npm install
    # or
    yarn install
-   ```
 
-3. **Start Development Server**
-   ```sh
+3. **Set Up Environment Variables**
+
+   Create a `.env` file in the root directory of the project and add the following variables:
+
+   VITE_API_KEY=your_tmdb_api_key
+   VITE_BASE_URL=https://api.themoviedb.org/3
+
+   Replace `your_tmdb_api_key` with your actual API key from The Movie Database (TMDb).
+
+4. **Start Development Server**
    npm run dev
    # or
    yarn dev
-   ```
 
-4. **Build for Production**
-   ```sh
+5. **Build for Production**
    npm run build
    # or
    yarn build
-   ```
 
-5. **Run Tests**
-   ```sh
+6. **Run Tests**
    npm run test
    # or
    yarn test
-   ```
 
 ## Deployment
 
@@ -140,7 +137,8 @@ The application can be deployed using platforms like Netlify, Vercel, or Cloudfl
 - **Tailwind CSS**: Utility-first CSS framework.
 - **React Router**: Declarative routing for React.
 - **Redux**: Predictable state container for JavaScript apps.
+- **The Movie Database (TMDb) API**: A comprehensive database for movie and TV information.
 
 ## Contact
 
-For any inquiries, please contact [your-email@example.com].
+For any inquiries, please contact vinsdev185@gmail.com.
