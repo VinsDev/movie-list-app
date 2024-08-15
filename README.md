@@ -1,20 +1,75 @@
 # Movie List Application
 
-A responsive and dynamic movie list application built using React, Vite, TypeScript, Tailwind CSS, React Router Redux, and The Movie Database (TMDb) API.
+Hello there, welcome to the **Movie List Application** repository.
 
-## Features
+This application is built on a feature-based architecture using modern technologies such as React, Vite, TypeScript, Tailwind CSS, React Router, and Redux. This architecture ensures a clear separation of concerns, enhancing modularity, maintainability, and scalability, allowing seamless integration of new features. The application includes features like a movie list, detailed movie views, and the ability to add new movies.
 
-- **Movie List**: View a paginated list of movies fetched from a free API.
-- **Search**: Search for movies with auto-suggest and last 10 search keywords saved.
-- **Add New Movie**: Add a new movie to the list via a popup form.
-- **Movie Details**: View detailed information about a selected movie.
-- **State Management**: Managed using Redux for predictable state updates.
-- **Routing**: Smooth navigation between movie list and details pages.
-- **Responsive Design**: Fully responsive for both desktop and mobile devices.
-- **Error Handling**: Comprehensive error handling for empty states, failed API calls, etc.
+## Pre-requisites
 
-## Project Structure
+To utilize this repository, you need to have the following installed:
 
+- Operating System: `Windows, Linux, or MacOS`
+- [Node.js 18.x](https://nodejs.org/en/)
+- [Git](https://git-scm.com/)
+- [Vite](https://vitejs.dev/) (for development)
+
+## Getting Started
+
+Here is a quick guide to help you get set up:
+
+- Clone the repository:
+
+   ```sh
+   git clone https://github.com/VinsDev/movie-list-app.git
+   cd movie-list-app
+   ```
+
+- Install the required Node dependencies:
+
+   ```sh
+   npm install
+   # or
+   yarn install
+   ```
+
+- Set Up Environment Variables:
+
+   Create a `.env` file in the root directory of the project and add the following variables:
+
+   ```env
+   VITE_API_KEY=your_tmdb_api_key
+   VITE_BASE_URL=https://api.themoviedb.org/3
+   ```
+
+   Replace `your_tmdb_api_key` with your actual API key from The Movie Database (TMDb).
+
+- Run the application:
+
+   ```sh
+   npm run dev      # for development
+   # or
+   yarn dev
+   ```
+
+- Build the application for production:
+
+   ```sh
+   npm run build
+   # or
+   yarn build
+   ```
+
+- Run Tests:
+
+   ```sh
+   npm run test
+   # or
+   yarn test
+   ```
+
+## Folder/Directory Structure
+
+```
 src/
 │
 ├── app/                      # Application-wide settings and store configuration
@@ -84,60 +139,65 @@ src/
 ├── tsconfig.node.json        # TypeScript configuration for Node.js
 ├── vite.config.ts            # Vite configuration
 └── index.tsx                 # Main entry point for the React application
+```
 
-## Setup Instructions
+## Technology Stacks
 
-1. **Clone the Repository**
-   git clone https://github.com/VinsDev/movie-list-app.git
-   cd movie-list-app
+This application has been built with the following technologies:
 
-2. **Install Dependencies**
-   npm install
-   # or
-   yarn install
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![Redux](https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=redux&logoColor=white)
+![The Movie Database (TMDb) API](https://img.shields.io/badge/TMDb-01B5E7?style=for-the-badge&logo=themoviedatabase&logoColor=white)
 
-3. **Set Up Environment Variables**
+- [Vite](https://vitejs.dev/)
+- [React](https://reactjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [React Router](https://reactrouter.com/)
+- [Redux](https://redux.js.org/)
+- [The Movie Database (TMDb) API](https://www.themoviedb.org/documentation/api)
 
-   Create a `.env` file in the root directory of the project and add the following variables:
+## Contribution Guide
 
-   VITE_API_KEY=your_tmdb_api_key
-   VITE_BASE_URL=https://api.themoviedb.org/3
+To contribute to this repository, follow these steps:
 
-   Replace `your_tmdb_api_key` with your actual API key from The Movie Database (TMDb).
+- Checkout a new branch with your name and the feature you are working on. Example: `janedoe/add-movie-feature`.
 
-4. **Start Development Server**
-   npm run dev
-   # or
-   yarn dev
+   ```sh
+   git checkout -b yourname/feature
+   ```
 
-5. **Build for Production**
-   npm run build
-   # or
-   yarn build
+- After completing your work, create a commit with a comprehensive message. Example:
 
-6. **Run Tests**
-   npm run test
-   # or
-   yarn test
+   ```sh
+   git commit -m "Feature: Added search functionality with auto-suggest"
+   ```
 
-## Deployment
+- Push the changes to the remote repository:
 
-The application can be deployed using platforms like Netlify, Vercel, or Cloudflare Pages.
+   ```sh
+   git push -u origin yourname/feature
+   ```
 
-- **Deploy on Vercel**:
-  1. Create a new project on [Vercel](https://vercel.com/).
-  2. Link your GitHub/Bitbucket repository.
-  3. Deploy directly from the repository.
+- Ensure you create three environment files: `.env`, `.env.production`, and `.env.development`. 
 
-## Technologies Used
+  **(Add necessary variables in the appropriate file) Example:**
 
-- **Vite**: Blazing fast build tool.
-- **React**: A JavaScript library for building user interfaces.
-- **TypeScript**: Typed superset of JavaScript.
-- **Tailwind CSS**: Utility-first CSS framework.
-- **React Router**: Declarative routing for React.
-- **Redux**: Predictable state container for JavaScript apps.
-- **The Movie Database (TMDb) API**: A comprehensive database for movie and TV information.
+  ```env
+  VITE_API_KEY='your_tmdb_api_key'
+  ```
+
+  **Remember NOT to commit your `.env` files to version control.**
+
+- Once your code is in the remote branch, create a pull request to the `development` branch.
+- Each pull request requires at least 1 peer code review approval before the merge is completed.
+- Hurray! You have successfully contributed.
+
+You can read more about this contribution methodology from these [docs](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow).
 
 ## Contact
 
