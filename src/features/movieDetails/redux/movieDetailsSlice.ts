@@ -1,19 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchMovieDetailsFromApi } from '../api/movieDetailsApi';
-
-interface Movie {
-  id: string;
-  title: string;
-  overview: string;
-  release_date: string;
-  genres: { id: number; name: string }[];
-  vote_average: number;
-  poster_path: string;
-  runtime: number;
-  production_companies: { name: string }[];
-  budget: number;
-  revenue: number;
-}
+import { Movie } from '../../../definitions/definitions';
 
 interface MovieDetailsState {
   movie: Movie | null;
@@ -29,9 +16,13 @@ const initialState: MovieDetailsState = {
 
 export const fetchMovieDetails = createAsyncThunk<Movie, string>(
   'movieDetails/fetchMovieDetails',
-  async (id) => {
-    const response = await fetchMovieDetailsFromApi(id);
-    return response.data;
+  async (id, thunkAPI) => {
+    try {
+      const response = await fetchMovieDetailsFromApi(id);
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
   }
 );
 
