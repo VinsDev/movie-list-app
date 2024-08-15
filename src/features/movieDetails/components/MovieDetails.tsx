@@ -18,10 +18,10 @@ const MovieDetails: React.FC = () => {
 
   // Display a loading skeleton while fetching data
   if (loading) return <MovieDetailsSkeleton />;
-  
+
   // Display an error message if there was a problem fetching the data
   if (error) return <div className="text-red-500 text-center p-4">{error}</div>;
-  
+
   // If no movie is found, return null (nothing rendered)
   if (!movie) return null;
 
@@ -36,8 +36,8 @@ const MovieDetails: React.FC = () => {
           />
         </div>
         <div className="lg:w-2/3">
-          <h1 className="text-4xl font-bold mb-4">{movie.title}</h1>  // Display the movie title
-          <p className="text-gray-600 mb-6 text-lg leading-relaxed">{movie.overview}</p>  // Display the movie overview/description
+          <h1 className="text-4xl font-bold mb-4">{movie.title}</h1>
+          <p className="text-gray-600 mb-6 text-lg leading-relaxed">{movie.overview}</p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-white p-6 rounded-lg shadow-md">

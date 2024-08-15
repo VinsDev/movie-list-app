@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchMovies, addRecentSearch, removeRecentSearch, setFilteredMovies } from '../redux/movieListSlice';
 import { RootState, AppDispatch } from '../../../app/store';
@@ -9,12 +9,13 @@ const SearchBar: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const [query, setQuery] = useState('');  // Local state for the search query
-  const [suggestions, setSuggestions] = useState<string[]>([]);  // Local state for search suggestions
-  const [showDropdown, setShowDropdown] = useState(false);  // Controls visibility of the dropdown
-  const [isMobileSearchActive, setIsMobileSearchActive] = useState(false);  // Controls mobile-specific search UI
+  const [query, setQuery] = useState('');
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [isMobileSearchActive, setIsMobileSearchActive] = useState(false);
   const recentSearches = useSelector((state: RootState) => state.movieList.recentSearches);
   const movies = useSelector((state: RootState) => state.movieList.movies);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -57,10 +58,15 @@ const SearchBar: React.FC = () => {
       }
       setSuggestions([]);
       setShowDropdown(false);
-      setIsMobileSearchActive(false); // Close full-screen search mode on mobile after search
+      setIsMobileSearchActive(false);
     }
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleSearch(query);
+    }
+  };
   const handleSuggestionClick = (suggestion: string) => {
     setQuery(suggestion);
     handleSearch(suggestion);
@@ -74,22 +80,27 @@ const SearchBar: React.FC = () => {
   const handleFocus = () => {
     setShowDropdown(true);
     if (window.innerWidth <= 768) {
-      setIsMobileSearchActive(true); // Activate full-screen search mode on mobile
+      setIsMobileSearchActive(true);
     }
   };
 
   const handleBlur = () => {
-    // Hide the dropdown after a brief delay to allow interaction with suggestions
     setTimeout(() => {
-      setShowDropdown(false);
-    }, 100);
+      if (!inputRef.current?.contains(document.activeElement)) {
+        setShowDropdown(false);
+      }
+    }, 200);
+  };
+
+  const handleClick = () => {
+    setShowDropdown(true);
   };
 
   const clearSearch = () => {
     setQuery('');
     setSuggestions([]);
     setShowDropdown(false);
-    setIsMobileSearchActive(false); // Close full-screen search mode on mobile
+    setIsMobileSearchActive(false);
   };
 
   return (
@@ -97,14 +108,16 @@ const SearchBar: React.FC = () => {
       <div className="flex items-center gap-2 relative">
         <IoSearchOutline className={`absolute left-3 text-gray-400 ${isMobileSearchActive ? 'text-2xl' : ''}`} size={isMobileSearchActive ? 24 : 20} />
         <input
+          ref={inputRef}
           type="text"
           value={query}
           onChange={e => setQuery(e.target.value)}
+          onKeyDown={handleKeyDown}
           placeholder="Search movies..."
           className={`w-full ${isMobileSearchActive ? 'text-lg pl-12' : 'pl-10'} pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500`}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          onKeyPress={e => e.key === 'Enter' && handleSearch(query)}
+          onClick={handleClick}
         />
         {query && (
           <button
