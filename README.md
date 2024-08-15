@@ -9,7 +9,7 @@ This application is built on a feature-based architecture using modern technolog
 To utilize this repository, you need to have the following installed:
 
 - Operating System: `Windows, Linux, or MacOS`
-- [Node.js 18.x](https://nodejs.org/en/)
+- [Node.js 20.x](https://nodejs.org/en/)
 - [Git](https://git-scm.com/)
 - [Vite](https://vitejs.dev/) (for development)
 
