@@ -41,6 +41,7 @@ const MovieListPage: React.FC = () => {
       <div className='px-4 py-2 md:px-12 pb-6'>
         <MovieList />
       </div>
+      {/* Conditionally  render the Add movie modal . . . */}
       {isModalOpen && <AddMovieModal closeModal={closeModal} />}
     </div>
   );

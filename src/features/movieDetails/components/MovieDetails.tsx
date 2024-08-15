@@ -6,18 +6,23 @@ import { RootState, AppDispatch } from '../../../app/store';
 import MovieDetailsSkeleton from './MovieDetailsSkeleton';
 
 const MovieDetails: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id: string }>();  // Extract movie ID from the route parameters
   const dispatch: AppDispatch = useDispatch();
-  const { movie, loading, error } = useSelector((state: RootState) => state.movieDetails);
+  const { movie, loading, error } = useSelector((state: RootState) => state.movieDetails);  // Access the movie details state
 
   useEffect(() => {
     if (id) {
-      dispatch(fetchMovieDetails(id));
+      dispatch(fetchMovieDetails(id));  // Fetch movie details when component mounts or ID changes
     }
   }, [dispatch, id]);
 
+  // Display a loading skeleton while fetching data
   if (loading) return <MovieDetailsSkeleton />;
+  
+  // Display an error message if there was a problem fetching the data
   if (error) return <div className="text-red-500 text-center p-4">{error}</div>;
+  
+  // If no movie is found, return null (nothing rendered)
   if (!movie) return null;
 
   return (
@@ -25,14 +30,14 @@ const MovieDetails: React.FC = () => {
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="lg:w-1/3">
           <img
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}  // Display the movie poster
             alt={movie.title}
             className="w-full h-auto rounded-xl shadow-2xl"
           />
         </div>
         <div className="lg:w-2/3">
-          <h1 className="text-4xl font-bold mb-4">{movie.title}</h1>
-          <p className="text-gray-600 mb-6 text-lg leading-relaxed">{movie.overview}</p>
+          <h1 className="text-4xl font-bold mb-4">{movie.title}</h1>  // Display the movie title
+          <p className="text-gray-600 mb-6 text-lg leading-relaxed">{movie.overview}</p>  // Display the movie overview/description
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-white p-6 rounded-lg shadow-md">

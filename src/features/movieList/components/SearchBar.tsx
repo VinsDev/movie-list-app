@@ -9,10 +9,10 @@ const SearchBar: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const [query, setQuery] = useState('');
-  const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [isMobileSearchActive, setIsMobileSearchActive] = useState(false);
+  const [query, setQuery] = useState('');  // Local state for the search query
+  const [suggestions, setSuggestions] = useState<string[]>([]);  // Local state for search suggestions
+  const [showDropdown, setShowDropdown] = useState(false);  // Controls visibility of the dropdown
+  const [isMobileSearchActive, setIsMobileSearchActive] = useState(false);  // Controls mobile-specific search UI
   const recentSearches = useSelector((state: RootState) => state.movieList.recentSearches);
   const movies = useSelector((state: RootState) => state.movieList.movies);
 
@@ -79,6 +79,7 @@ const SearchBar: React.FC = () => {
   };
 
   const handleBlur = () => {
+    // Hide the dropdown after a brief delay to allow interaction with suggestions
     setTimeout(() => {
       setShowDropdown(false);
     }, 100);

@@ -8,11 +8,12 @@ import '../../../styles/global.css';
 const FilterOptions: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { genres, currentFilter } = useSelector((state: RootState) => state.movieList);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);  // Reference to the scrollable genre list container
+  const [canScrollLeft, setCanScrollLeft] = useState(false);  // State to track if scrolling left is possible
+  const [canScrollRight, setCanScrollRight] = useState(false); // State to track if scrolling right is possible
 
   useEffect(() => {
+    // Fetch genres if not already fetched
     if (genres.length <= 1) {
       dispatch(fetchGenres());
     }
@@ -27,7 +28,7 @@ const FilterOptions: React.FC = () => {
       }
     };
 
-    checkScrollPosition();
+    checkScrollPosition();  // Initial check for scroll position
 
     // Check scroll position when user scrolls
     if (scrollRef.current) {
@@ -46,17 +47,20 @@ const FilterOptions: React.FC = () => {
   }, [genres]);
 
   const handleFilterChange = (genreId: string) => {
+    // Dispatch an action to filter movies by selected genre
     dispatch(filterMovies(genreId));
   };
 
   const scrollLeft = () => {
     if (scrollRef.current) {
+      // Scroll the genre list to the left
       scrollRef.current.scrollBy({ left: -200, behavior: 'smooth' });
     }
   };
 
   const scrollRight = () => {
     if (scrollRef.current) {
+      // Scroll the genre list to the right
       scrollRef.current.scrollBy({ left: 200, behavior: 'smooth' });
     }
   };

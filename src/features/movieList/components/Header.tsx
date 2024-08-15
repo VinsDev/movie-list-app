@@ -5,7 +5,7 @@ import FilterOptions from './FilterOptions';
 
 interface HeaderProps {
     openModal: () => void;
-    showButton: boolean;
+    showButton: boolean; // Determines whether to show the "Add New Movie" button
 }
 
 const Header: React.FC<HeaderProps> = ({ openModal, showButton }) => {

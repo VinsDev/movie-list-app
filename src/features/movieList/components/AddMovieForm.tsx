@@ -10,6 +10,8 @@ interface AddMovieModalProps {
 
 const AddMovieModal: React.FC<AddMovieModalProps> = ({ closeModal }) => {
   const dispatch = useDispatch<AppDispatch>();
+  
+  // State to manage the movie form data
   const [movieData, setMovieData] = useState({
     title: '',
     overview: '',
@@ -18,20 +20,25 @@ const AddMovieModal: React.FC<AddMovieModalProps> = ({ closeModal }) => {
     runtime: '',
     posterImage: null as File | null,
   });
+
+  // State for managing loading and error states
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  // Handle changes in form inputs
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setMovieData(prev => ({ ...prev, [name]: value }));
   };
 
+  // Handle changes for the image input
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setMovieData(prev => ({ ...prev, posterImage: e.target.files![0] }));
     }
   };
 
+  // Handle form submission to add a new movie
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -39,13 +46,14 @@ const AddMovieModal: React.FC<AddMovieModalProps> = ({ closeModal }) => {
 
     try {
       await dispatch(addMovieAsync(movieData));
-      closeModal();
+      closeModal();  // Close modal on successful submission
     } catch (error) {
       setError('Failed to add movie. Please try again.');
     } finally {
       setLoading(false);
     }
   };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 overflow-y-auto">
       <div className="bg-white rounded-lg shadow-xl max-w-lg w-full m-4 overflow-hidden">

@@ -8,23 +8,26 @@ const PaginationControls: React.FC = () => {
   const { currentPage, moviesPerPage, filteredMovies } = useSelector((state: RootState) => state.movieList);
   const [jumpToPage, setJumpToPage] = useState('');
 
-  const totalPages = Math.ceil(filteredMovies.length / moviesPerPage);
+  const totalPages = Math.ceil(filteredMovies.length / moviesPerPage);  // Calculate total pages based on filtered movies
 
+  // Handle page change by dispatching an action to update the current page
   const handlePageChange = (page: number) => {
     if (page >= 1 && page <= totalPages) {
       dispatch(setCurrentPage(page));
     }
   };
 
+  // Handle form submission for jumping to a specific page
   const handleJumpToPage = (e: React.FormEvent) => {
     e.preventDefault();
     const page = parseInt(jumpToPage);
     if (!isNaN(page)) {
       handlePageChange(page);
-      setJumpToPage('');
+      setJumpToPage('');  // Clear input after jumping to the page
     }
   };
 
+  // Render page numbers with a maximum of 5 visible pages
   const renderPageNumbers = () => {
     const pageNumbers = [];
     const maxVisiblePages = 5;
@@ -40,11 +43,10 @@ const PaginationControls: React.FC = () => {
         <button
           key={i}
           onClick={() => handlePageChange(i)}
-          className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors duration-200 ${
-            currentPage === i
+          className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors duration-200 ${currentPage === i
               ? 'bg-blue-500 text-white'
               : 'text-gray-700 hover:bg-gray-100'
-          }`}
+            }`}
         >
           {i}
         </button>
@@ -57,7 +59,7 @@ const PaginationControls: React.FC = () => {
     <div className="flex flex-col items-center mt-8 space-y-4">
       <div className="flex items-center space-x-2">
         <button
-          onClick={() => handlePageChange(1)}
+          onClick={() => handlePageChange(1)}  // Navigate to the first page
           disabled={currentPage === 1}
           className="p-2 rounded-full text-gray-600 hover:bg-gray-100 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           aria-label="First page"
@@ -67,7 +69,7 @@ const PaginationControls: React.FC = () => {
           </svg>
         </button>
         <button
-          onClick={() => handlePageChange(currentPage - 1)}
+          onClick={() => handlePageChange(currentPage - 1)}  // Navigate to the previous page
           disabled={currentPage === 1}
           className="p-2 rounded-full text-gray-600 hover:bg-gray-100 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           aria-label="Previous page"
@@ -80,7 +82,7 @@ const PaginationControls: React.FC = () => {
           {renderPageNumbers()}
         </div>
         <button
-          onClick={() => handlePageChange(currentPage + 1)}
+          onClick={() => handlePageChange(currentPage + 1)}  // Navigate to the next page
           disabled={currentPage === totalPages}
           className="p-2 rounded-full text-gray-600 hover:bg-gray-100 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           aria-label="Next page"
@@ -90,7 +92,7 @@ const PaginationControls: React.FC = () => {
           </svg>
         </button>
         <button
-          onClick={() => handlePageChange(totalPages)}
+          onClick={() => handlePageChange(totalPages)}  // Navigate to the last page
           disabled={currentPage === totalPages}
           className="p-2 rounded-full text-gray-600 hover:bg-gray-100 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           aria-label="Last page"
@@ -107,7 +109,7 @@ const PaginationControls: React.FC = () => {
             min="1"
             max={totalPages}
             value={jumpToPage}
-            onChange={(e) => setJumpToPage(e.target.value)}
+            onChange={(e) => setJumpToPage(e.target.value)}  // Handle input change for jumping to a specific page
             className="w-16 px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             placeholder="Page"
           />
