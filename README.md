@@ -2,7 +2,7 @@
 
 Hello there, welcome to the **Movie List Application** repository.
 
-This application is built on a feature-based architecture using modern technologies such as React, Vite, TypeScript, Tailwind CSS, React Router, and Redux. This architecture ensures a clear separation of concerns, enhancing modularity, maintainability, and scalability, allowing seamless integration of new features. The application includes features like a movie list, detailed movie views, and the ability to add new movies. For more information on how the Movie Database (TMDb) API is utilized, please refer to the API.md documentation.
+This application is built on a feature-based architecture using modern technologies such as React, Vite, TypeScript, Tailwind CSS, React Router, and Redux. This architecture ensures a clear separation of concerns, enhancing modularity, maintainability, and scalability, allowing seamless integration of new features. The application includes features like a movie list, detailed movie views, and the ability to add new movies. For more information on how the Movie Database (TMDb) API is utilized, please refer to the `API.md` documentation.
 
 ## Pre-requisites
 
