@@ -14,6 +14,7 @@ const PaginationControls: React.FC = () => {
   const handlePageChange = (page: number) => {
     if (page >= 1 && page <= totalPages) {
       dispatch(setCurrentPage(page));
+      window.scrollTo(0, 0);
     }
   };
 
@@ -44,8 +45,8 @@ const PaginationControls: React.FC = () => {
           key={i}
           onClick={() => handlePageChange(i)}
           className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors duration-200 ${currentPage === i
-              ? 'bg-blue-500 text-white'
-              : 'text-gray-700 hover:bg-gray-100'
+            ? 'bg-blue-500 text-white'
+            : 'text-gray-700 hover:bg-gray-100'
             }`}
         >
           {i}
