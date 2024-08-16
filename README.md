@@ -161,6 +161,11 @@ This application has been built with the following technologies:
 - [Redux](https://redux.js.org/)
 - [The Movie Database (TMDb) API](https://www.themoviedb.org/documentation/api)
 
+
+## Limitations
+
+- **Movie Upload Feature:** The Movie Database (TMDb) API does not currently support movie uploads. Therefore, the upload feature in this application is only a simulation of the actual process. All necessary components and structures are in place to handle real-time uploads when the appropriate API endpoint is provided.
+
 ## Contribution Guide
 
 To contribute to this repository, follow these steps:
