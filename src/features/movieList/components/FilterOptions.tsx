@@ -74,7 +74,7 @@ const FilterOptions: React.FC = () => {
           <button
             key={genre.id}
             onClick={() => handleFilterChange(genre.id.toString())}
-            className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${
+            className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors duration-300 ${
               currentFilter === genre.id.toString()
                 ? 'bg-white text-indigo-600'
                 : 'bg-indigo-500 text-white hover:bg-indigo-400'

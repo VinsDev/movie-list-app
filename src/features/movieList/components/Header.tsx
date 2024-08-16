@@ -27,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({ openModal }) => {
                         <SearchBar />
                     </div>
                 </div>
-                <div className='pt-3'>
+                <div className=''>
                     <FilterOptions />
                 </div>
             </div>
