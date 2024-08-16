@@ -1,44 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import MovieList from './components/MovieList';
-import Header from './components/Header';
 import AddMovieModal from './components/AddMovieForm';
+import Header from './components/Header';
 
 const MovieListPage: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showButton, setShowButton] = useState(true);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  useEffect(() => {
-    let lastScrollY = window.scrollY;
 
-    // Hide add movie button on scroll for mobile . . .
-    const handleScroll = () => {
-      const isMobileView = window.innerWidth <= 768;
-      if (isMobileView) {
-        if (window.scrollY > lastScrollY && window.scrollY > 0) {
-          setShowButton(false);
-        } else if (window.scrollY === 0) {
-          setShowButton(true);
-        }
-      } else {
-        setShowButton(true);
-      }
-      lastScrollY = window.scrollY;
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   return (
     <div className='bg-white'>
-      <Header openModal={openModal} showButton={showButton} />
-      <div className='px-4 py-2 md:px-12 pb-6'>
+      <Header openModal={openModal} />
+      <div className='px-4 py-4 md:px-12 md:py-12 pb-6'>
         <MovieList />
       </div>
       {/* Conditionally  render the Add movie modal . . . */}

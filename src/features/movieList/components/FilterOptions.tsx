@@ -8,12 +8,11 @@ import '../../../styles/global.css';
 const FilterOptions: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { genres, currentFilter } = useSelector((state: RootState) => state.movieList);
-  const scrollRef = useRef<HTMLDivElement>(null);  // Reference to the scrollable genre list container
-  const [canScrollLeft, setCanScrollLeft] = useState(false);  // State to track if scrolling left is possible
-  const [canScrollRight, setCanScrollRight] = useState(false); // State to track if scrolling right is possible
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
 
   useEffect(() => {
-    // Fetch genres if not already fetched
     if (genres.length <= 1) {
       dispatch(fetchGenres());
     }
@@ -28,14 +27,12 @@ const FilterOptions: React.FC = () => {
       }
     };
 
-    checkScrollPosition();  // Initial check for scroll position
+    checkScrollPosition();
 
-    // Check scroll position when user scrolls
     if (scrollRef.current) {
       scrollRef.current.addEventListener('scroll', checkScrollPosition);
     }
 
-    // Recheck scroll position when window is resized
     window.addEventListener('resize', checkScrollPosition);
 
     return () => {
@@ -47,20 +44,17 @@ const FilterOptions: React.FC = () => {
   }, [genres]);
 
   const handleFilterChange = (genreId: string) => {
-    // Dispatch an action to filter movies by selected genre
     dispatch(filterMovies(genreId));
   };
 
   const scrollLeft = () => {
     if (scrollRef.current) {
-      // Scroll the genre list to the left
       scrollRef.current.scrollBy({ left: -200, behavior: 'smooth' });
     }
   };
 
   const scrollRight = () => {
     if (scrollRef.current) {
-      // Scroll the genre list to the right
       scrollRef.current.scrollBy({ left: 200, behavior: 'smooth' });
     }
   };
@@ -68,8 +62,8 @@ const FilterOptions: React.FC = () => {
   return (
     <div className="relative">
       {canScrollLeft && (
-        <div className="absolute left-0 top-1/2 transform -translate-y-1/2 rounded-full p-2 hover:bg-black/[0.2] z-10 cursor-pointer">
-          <FaChevronLeft color="black" size={20} onClick={scrollLeft} />
+        <div className="hidden md:block absolute left-0 top-1/2 transform -translate-y-1/2 rounded-full p-2 hover:bg-white/[0.2] z-10 cursor-pointer">
+          <FaChevronLeft color="white" size={20} onClick={scrollLeft} />
         </div>
       )}
       <div
@@ -80,18 +74,19 @@ const FilterOptions: React.FC = () => {
           <button
             key={genre.id}
             onClick={() => handleFilterChange(genre.id.toString())}
-            className={`px-4 py-2 rounded-lg text-sm ${currentFilter === genre.id.toString()
-              ? 'bg-blue-600 text-white'
-              : 'bg-gray-300 text-gray-900'
-              }`}
+            className={`px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300 ${
+              currentFilter === genre.id.toString()
+                ? 'bg-white text-indigo-600'
+                : 'bg-indigo-500 text-white hover:bg-indigo-400'
+            }`}
           >
             {genre.name}
           </button>
         ))}
       </div>
       {canScrollRight && (
-        <div className="absolute right-0 top-1/2 transform -translate-y-1/2 rounded-full p-2 hover:bg-black/[0.2] z-10 cursor-pointer">
-          <FaChevronRight color="black" size={20} onClick={scrollRight} />
+        <div className="hidden md:block absolute right-0 top-1/2 transform -translate-y-1/2 rounded-full p-2 hover:bg-white/[0.2] z-10 cursor-pointer">
+          <FaChevronRight color="white" size={20} onClick={scrollRight} />
         </div>
       )}
     </div>

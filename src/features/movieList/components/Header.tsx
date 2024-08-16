@@ -5,30 +5,31 @@ import FilterOptions from './FilterOptions';
 
 interface HeaderProps {
     openModal: () => void;
-    showButton: boolean; // Determines whether to show the "Add New Movie" button
 }
 
-const Header: React.FC<HeaderProps> = ({ openModal, showButton }) => {
+const Header: React.FC<HeaderProps> = ({ openModal }) => {
     return (
-        <header className="sticky top-0 z-50 bg-white p-4 w-full">
-            <div className="flex flex-col md:flex-row justify-between items-center w-full md:pl-4">
-                <Link to='/'>
-                    <h1 className="text-3xl font-medium">Movie List</h1>
-                </Link>
-                <div className="w-full md:w-1/2 mt-3 md:mt-0">
-                    <SearchBar />
+        <header className="sticky top-0 z-50 bg-gradient-to-r from-indigo-600 to-purple-600 shadow-lg">
+            <div className="container mx-auto px-4 py-3">
+                <div className="flex flex-col space-y-3">
+                    <div className="flex justify-between items-center">
+                        <Link to='/'>
+                            <h1 className="text-2xl font-bold tracking-tight text-white">MoviesList</h1>
+                        </Link>
+                            <button
+                                onClick={openModal}
+                                className="px-4 py-2 bg-white text-indigo-600 font-semibold rounded-full text-sm shadow-md hover:bg-opacity-90 transition duration-300 ease-in-out"
+                            >
+                                + Add Movie
+                            </button>
+                    </div>
+                    <div className="w-full">
+                        <SearchBar />
+                    </div>
                 </div>
-                {showButton && (
-                    <button
-                        onClick={openModal}
-                        className="px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 mt-2 md:mt-0"
-                    >
-                        Add New Movie
-                    </button>
-                )}
-            </div>
-            <div className='pt-4'>
-                <FilterOptions />
+                <div className='pt-3'>
+                    <FilterOptions />
+                </div>
             </div>
         </header>
     );

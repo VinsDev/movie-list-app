@@ -12,7 +12,6 @@ const SearchBar: React.FC = () => {
   const [query, setQuery] = useState('');
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [isMobileSearchActive, setIsMobileSearchActive] = useState(false);
   const recentSearches = useSelector((state: RootState) => state.movieList.recentSearches);
   const movies = useSelector((state: RootState) => state.movieList.movies);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -58,7 +57,6 @@ const SearchBar: React.FC = () => {
       }
       setSuggestions([]);
       setShowDropdown(false);
-      setIsMobileSearchActive(false);
     }
   };
 
@@ -67,6 +65,7 @@ const SearchBar: React.FC = () => {
       handleSearch(query);
     }
   };
+
   const handleSuggestionClick = (suggestion: string) => {
     setQuery(suggestion);
     handleSearch(suggestion);
@@ -79,9 +78,6 @@ const SearchBar: React.FC = () => {
 
   const handleFocus = () => {
     setShowDropdown(true);
-    if (window.innerWidth <= 768) {
-      setIsMobileSearchActive(true);
-    }
   };
 
   const handleBlur = () => {
@@ -100,13 +96,12 @@ const SearchBar: React.FC = () => {
     setQuery('');
     setSuggestions([]);
     setShowDropdown(false);
-    setIsMobileSearchActive(false);
   };
 
   return (
-    <div className={`relative max-w-2xl mx-auto ${isMobileSearchActive ? 'fixed inset-0 bg-white z-50 p-4' : ''}`}>
+    <div className="relative max-w-2xl mx-auto  p-4">
       <div className="flex items-center gap-2 relative">
-        <IoSearchOutline className={`absolute left-3 text-gray-400 ${isMobileSearchActive ? 'text-2xl' : ''}`} size={isMobileSearchActive ? 24 : 20} />
+        <IoSearchOutline className="absolute left-3 text-gray-400" size={20} />
         <input
           ref={inputRef}
           type="text"
@@ -114,7 +109,7 @@ const SearchBar: React.FC = () => {
           onChange={e => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Search movies..."
-          className={`w-full ${isMobileSearchActive ? 'text-lg pl-12' : 'pl-10'} pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500`}
+          className="w-full pr-4 pl-10 py-2 rounded-full focus:outline-none focus:ring-1 focus:ring-gray-300 shadow-md"
           onFocus={handleFocus}
           onBlur={handleBlur}
           onClick={handleClick}
